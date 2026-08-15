@@ -1,0 +1,600 @@
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 2rem 4rem;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, #fdf6f0 0%, #fef9f5 40%, #f5f0ff 100%);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  animation: blobFloat 8s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #f5c6a0 0%, #f0a070 100%);
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #d4b8f0 0%, #b89de0 100%);
+  bottom: -80px;
+  right: -80px;
+  animation-delay: -3s;
+}
+
+.blob-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #a8d8c8 0%, #80c4b0 100%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -5s;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(139, 90, 60, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 90, 60, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@keyframes blobFloat {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(20px, -20px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-15px, 15px) scale(0.97);
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 580px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  background: rgba(139, 90, 60, 0.1);
+  border: 1px solid rgba(139, 90, 60, 0.2);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 1.2rem;
+  animation: fadeSlideIn 0.6s 0.2s both;
+}
+
+.hero-name {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 0.6rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeSlideIn 0.7s 0.3s both;
+}
+
+.hero-role {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin: 0 0 1.2rem;
+  animation: fadeSlideIn 0.7s 0.4s both;
+}
+
+.hero-objective {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+  max-width: 500px;
+  animation: fadeSlideIn 0.7s 0.5s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeSlideIn 0.7s 0.6s both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.8rem;
+  background: var(--gradient-primary);
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(139, 90, 60, 0.3);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  &:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 14px 32px rgba(139, 90, 60, 0.45);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .btn-icon {
+      transform: translateY(2px);
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(0.99);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.8rem;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.25s, border-color 0.25s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity 0.25s;
+    z-index: 0;
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+    color: inherit;
+  }
+
+  &:hover {
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 28px rgba(139, 90, 60, 0.3);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(0.99);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+.hero-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 2.5rem;
+  animation: fadeSlideIn 0.7s 0.9s both;
+
+  span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 2px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.6);
+      animation: shimmer 2s infinite;
+    }
+  }
+}
+
+.hero-visual {
+  position: relative;
+  z-index: 1;
+  /* orbit diameter — tags sit on a 280px circle */
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.8s 0.3s ease, transform 0.8s 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.avatar-ring {
+  position: absolute;
+  border-radius: 50%;
+
+  &.outer {
+    width: 280px;
+    height: 280px;
+    border: 1.5px dashed rgba(139, 90, 60, 0.22);
+    animation: spin 28s linear infinite;
+  }
+
+  &.middle {
+    width: 210px;
+    height: 210px;
+    border: 1.5px solid rgba(180, 120, 200, 0.18);
+    animation: spin 18s linear infinite reverse;
+  }
+}
+
+.avatar-card {
+  width: 160px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 40px rgba(139, 90, 60, 0.18), 0 0 0 10px rgba(255, 255, 255, 0.55);
+  z-index: 2;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+  padding: 0 0.6rem;
+
+  &:hover {
+    transform: scale(1.07);
+    box-shadow: 0 20px 56px rgba(139, 90, 60, 0.28), 0 0 0 12px rgba(255, 255, 255, 0.6);
+  }
+}
+
+.avatar-initials {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  letter-spacing: 1.5px;
+}
+
+.avatar-label {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0.35rem;
+  text-align: center;
+}
+
+.avatar-sub {
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  margin-top: 0.12rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/*
+  Float tags — placed at exact clock positions on the outer ring (r = 140px from centre).
+  Each tag uses its own animation so the float never fights the base position.
+  Base position: translate(-50%, -50%) centres the tag on its anchor point.
+  Float animation adds a small secondary translate on top via a wrapper trick:
+  we animate the tag itself with a tiny Y or X nudge using @keyframes that
+  START and END at the centred state so there is no jump.
+*/
+.float-tag {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  border-radius: 22px;
+  padding: 0.42rem 1rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  z-index: 3;
+  /* base centering — each tag's top/left points to its orbit anchor */
+  transform: translate(-50%, -50%);
+  transition: box-shadow 0.25s, filter 0.25s;
+
+  &:hover {
+    box-shadow: 0 8px 28px rgba(139, 90, 60, 0.22);
+    filter: brightness(1.04);
+  }
+
+  /*
+    Orbit radius = 140px from centre of .hero-visual (320px wide → centre at 160px).
+    Positions (angle from top, clockwise):
+      tag-1 Finance   — ~330° → top-left quadrant   (≈ -10 o'clock)
+      tag-2 Marketing — ~30°  → top-right quadrant  (≈  1 o'clock)
+      tag-3 Strategy  — ~150° → bottom-right        (≈  5 o'clock)
+      tag-4 MBA       — ~210° → bottom-left         (≈  7 o'clock)
+
+    x = cx + r·sin(θ),  y = cy - r·cos(θ),  cx=cy=160px, r=140px
+    tag-1 (330°): x=160+140·sin(330°)=160-70=90,   y=160-140·cos(330°)=160-121=39
+    tag-2  (30°): x=160+140·sin(30°) =160+70=230,  y=160-140·cos(30°) =160-121=39
+    tag-3 (150°): x=160+140·sin(150°)=160+70=230,  y=160-140·cos(150°)=160+121=281
+    tag-4 (210°): x=160+140·sin(210°)=160-70=90,   y=160-140·cos(210°)=160+121=281
+  */
+  &.tag-1 {
+    left: 88px;
+    top: 40px;
+    animation: orbitFloat 3.8s ease-in-out infinite 0s;
+  }
+
+  &.tag-2 {
+    left: 288px;
+    top: 88px;
+    animation: orbitFloat 3.8s ease-in-out infinite 0.95s;
+  }
+
+  &.tag-3 {
+    left: 230px;
+    top: 280px;
+    animation: orbitFloat 3.8s ease-in-out infinite 1.9s;
+  }
+
+  &.tag-4 {
+    left: 40px;
+    top: 220px;
+    animation: orbitFloat 3.8s ease-in-out infinite 2.85s;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitFloat {
+
+  /* starts and ends at the centred base — no jump */
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-9px);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    left: 200%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 5rem 1.2rem 3rem;
+    gap: 2rem;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .hero-content {
+    order: 1;
+  }
+
+  .hero-objective {
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-scroll-hint {
+    justify-content: center;
+  }
+
+  /* Scale the whole visual down on mobile — container 260px, ring 230px, r=115 */
+  .hero-visual {
+    width: 260px;
+    height: 260px;
+  }
+
+  .avatar-ring.outer {
+    width: 230px;
+    height: 230px;
+  }
+
+  .avatar-ring.middle {
+    width: 172px;
+    height: 172px;
+  }
+
+  .avatar-card {
+    width: 130px;
+    height: 130px;
+  }
+
+  .avatar-initials {
+    font-size: 1.6rem;
+  }
+
+  .float-tag {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  /*
+    Recalculate for 260px container (cx=cy=130), r=115:
+    tag-1 (330°): x=130+115·sin(330°)=130-57.5=72,  y=130-115·cos(330°)=130-99.6=30
+    tag-2  (30°): x=130+115·sin(30°) =130+57.5=188, y=30
+    tag-3 (150°): x=188,                             y=130+99.6=230
+    tag-4 (210°): x=72,                              y=230
+  */
+  .tag-1 {
+    left: 52px !important;
+    top: 12px !important;
+  }
+
+  .tag-2 {
+    left: 230px !important;
+    top: 55px !important;
+  }
+
+  .tag-3 {
+    left: 180px !important;
+    top: 240px !important;
+  }
+
+  .tag-4 {
+    left: 22px !important;
+    top: 180px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .blob,
+  .avatar-ring,
+  .float-tag,
+  .scroll-line::after {
+    animation: none;
+  }
+
+  .hero-content,
+  .hero-visual {
+    transition: none;
+  }
+}

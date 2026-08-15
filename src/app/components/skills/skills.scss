@@ -1,0 +1,125 @@
+.skills-section { background: var(--bg-main); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.skills-group {
+  padding: 2rem;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+.skills-group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 1.4rem;
+
+  .group-icon { font-size: 1.2rem; }
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.1rem;
+  border-radius: 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: default;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s, background 0.25s, color 0.25s;
+  animation: none;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .revealed & {
+    animation: tagPop 0.35s var(--delay, 0s) both;
+  }
+
+  &:hover {
+    transform: translateY(-4px) scale(1.07);
+    &::before { opacity: 1; }
+  }
+
+  &.marketing {
+    background: rgba(16,120,80,0.08);
+    color: #0d7a50;
+    border: 1.5px solid rgba(16,120,80,0.2);
+
+    &:hover {
+      background: #0d7a50;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(16,120,80,0.35);
+    }
+  }
+
+  &.finance {
+    background: rgba(30,80,180,0.08);
+    color: #1e50b4;
+    border: 1.5px solid rgba(30,80,180,0.2);
+
+    &:hover {
+      background: #1e50b4;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(30,80,180,0.35);
+    }
+  }
+
+  &.tech {
+    background: rgba(139,90,60,0.1);
+    color: var(--accent);
+    border: 1.5px solid rgba(139,90,60,0.2);
+
+    &:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(139,90,60,0.35);
+    }
+  }
+
+  &.key {
+    background: rgba(120,80,180,0.1);
+    color: #7850b4;
+    border: 1.5px solid rgba(120,80,180,0.2);
+
+    &:hover {
+      background: #7850b4;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(120,80,180,0.35);
+    }
+  }
+}
+
+@keyframes tagPop {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 600px) {
+  .skills-grid { grid-template-columns: 1fr; }
+}

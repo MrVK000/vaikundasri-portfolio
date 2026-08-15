@@ -1,0 +1,96 @@
+.certs-section { background: var(--bg-alt); }
+
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin-top: 2.5rem;
+}
+
+.cert-card {
+  padding: 2rem 1.6rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s, border-color 0.3s;
+  animation: none;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transition: transform 0.35s ease;
+  }
+
+  .revealed & {
+    animation: fadeSlideUp 0.45s var(--delay, 0s) both;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(139,90,60,0.2);
+    &::before { transform: scaleX(1); }
+  }
+}
+
+.cert-icon {
+  font-size: 2.4rem;
+  width: 64px; height: 64px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(139,90,60,0.2);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s;
+
+  .cert-card:hover & {
+    transform: rotate(15deg) scale(1.15);
+    box-shadow: 0 10px 28px rgba(139,90,60,0.4);
+  }
+}
+
+.cert-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(139,90,60,0.1);
+  padding: 0.2rem 0.7rem;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.cert-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0;
+  text-align: center;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .certs-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .certs-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-card { animation: none !important; transition: none; }
+}
