@@ -16,17 +16,22 @@ import { isPlatformBrowser } from '@angular/common';
       z-index: 9999;
       border-radius: 50%;
       transform: translate(-50%, -50%);
+      opacity: 0;
       transition: opacity 0.3s;
     }
     .cursor-dot {
       width: 8px; height: 8px;
       background: var(--accent);
-      transition: transform 0.1s ease, background 0.2s;
+      transition: transform 0.1s ease, background 0.2s, opacity 0.3s;
     }
     .cursor-ring {
       width: 36px; height: 36px;
       border: 2px solid var(--accent-soft);
-      transition: transform 0.12s ease, width 0.2s, height 0.2s, border-color 0.2s;
+      transition: transform 0.12s ease, width 0.2s, height 0.2s, border-color 0.2s, opacity 0.3s;
+    }
+    :host(.active) .cursor-dot,
+    :host(.active) .cursor-ring {
+      opacity: 1;
     }
     :host(.hovering) .cursor-ring {
       width: 52px; height: 52px;
@@ -34,6 +39,10 @@ import { isPlatformBrowser } from '@angular/common';
     }
     :host(.hovering) .cursor-dot {
       transform: translate(-50%, -50%) scale(1.5);
+    }
+    /* Hide on tablet and below */
+    @media (max-width: 1024px) {
+      .cursor-dot, .cursor-ring { display: none !important; }
     }
   `]
 })
@@ -60,6 +69,7 @@ export class CursorComponent implements OnInit, OnDestroy {
         this.mouseX = e.clientX; this.mouseY = e.clientY;
         this.dot.style.left = e.clientX + 'px';
         this.dot.style.top = e.clientY + 'px';
+        host?.classList.add('active');
       }),
       this.renderer.listen('document', 'mouseover', (e: MouseEvent) => {
         const el = e.target as HTMLElement;
